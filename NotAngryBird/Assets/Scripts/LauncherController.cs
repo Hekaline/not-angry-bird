@@ -198,6 +198,8 @@ public class LauncherController : MonoBehaviour
 	void DrawTrajectory(Vector2 start, Vector2 end, float _force)
 	{
 		Vector2 dist = end - start;
+		
+		// 새 뒤쪽을 조준했을 경우 표시하지 않음
 		if (dist.x >= 0) return;
 		
 		// 당긴 쪽의 반대로 날려야 하므로 dist 뒤집기
