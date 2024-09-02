@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class LauncherController : MonoBehaviour
 {
-    Vector2 startPos;
-    Vector2 endPos;
-    Vector2 value;
+	Vector2 startPos;
+	Vector2 endPos;
+	Vector2 distance;
 
 	[SerializeField]
 	private GameObject birdSet;
@@ -97,7 +97,7 @@ public class LauncherController : MonoBehaviour
 
 	private void Fire()
 	{		
-		value = endPos - startPos;
+		distance = endPos - startPos;
 		Vector2 dir = (startPos - endPos).normalized; 
 		if (dir.x <= 0)
 		{
