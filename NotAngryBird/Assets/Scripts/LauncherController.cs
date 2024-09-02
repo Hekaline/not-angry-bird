@@ -204,13 +204,14 @@ public class LauncherController : MonoBehaviour
 		
 		// 당긴 쪽의 반대로 날려야 하므로 dist 뒤집기
 		// 새의 질량을 나눠서 정확한 힘 계산
-		Vector2 force = -dist.normalized * _force / selectedBird.GetComponent<Rigidbody2D>().mass;
+		Vector2 force = 
+			-dist.normalized * _force / selectedBird.GetComponent<Rigidbody2D>().mass;
 
-		// 선의 간격이 0.1초 사이의 간격임
-		float timeInterval = 0.1f;
+		// 선의 간격이 0.05초 사이의 간격임
+		float timeInterval = 0.05f;
 		
-		// 새가 날아간 지 (1초에 생기는 선 개수 * 1.5) 점의 개수 정도까지의 거리 계산
-		int numPoints = Mathf.CeilToInt(1f / timeInterval) * 3 / 2 - 1;
+		// 새가 날아가는 1초 동안의 거리 계산
+		int numPoints = Mathf.CeilToInt(1f / timeInterval);
 		trajLineRenderer.positionCount = numPoints;
 		
 		// 궤적 선의 시작하는 굵기
@@ -225,11 +226,12 @@ public class LauncherController : MonoBehaviour
 	
 		for (int i = 0; i < numPoints; i++)
 		{
-			// i에 따른 새가 날아간 후의 시간 계산 (나누기 2로 궤적 길이 너프)
-			float time = i * timeInterval / 2;
+			// i에 따른 새가 날아간 후의 시간 계산
+			float time = i * timeInterval;
 			
 			// time에 따른 새 위치 계산
-			Vector2 position = CalculateProjectilePosition(selectedBird.transform.position, force, time);
+			Vector2 position = CalculateProjectilePosition(
+				selectedBird.transform.position, force, time);
 			positions[i] = position;
 		}
 		
